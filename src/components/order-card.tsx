@@ -40,14 +40,14 @@ export default function OrderCard({ order, onStatusChange }: OrderCardProps) {
                 {order.items.map((item, index) => (
                     <li key={index} className="flex justify-between">
                         <span>{item.quantity}x {item.name}</span>
-                        <span>${(item.quantity * item.unitPrice).toFixed(2)}</span>
+                        <span>₹{(item.quantity * item.unitPrice).toFixed(2)}</span>
                     </li>
                 ))}
             </ul>
             <div className="border-t my-2" />
             <div className="flex justify-between font-bold">
                 <span>Total</span>
-                <span>${order.total.toFixed(2)}</span>
+                <span>₹{order.total.toFixed(2)}</span>
             </div>
         </CardContent>
         <CardFooter className="flex justify-between">

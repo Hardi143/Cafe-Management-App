@@ -78,7 +78,7 @@ export default function CustomerMenu({ menuItems, tableId }: { menuItems: MenuIt
                                 <Image src={item.menuItem.imageUrl} alt={item.menuItem.name} width={64} height={64} className="rounded-md w-16 h-16 object-cover" data-ai-hint="coffee pastry"/>
                                 <div>
                                     <p className="font-semibold">{item.menuItem.name}</p>
-                                    <p className="text-sm text-muted-foreground">${item.unitPrice.toFixed(2)}</p>
+                                    <p className="text-sm text-muted-foreground">₹{item.unitPrice.toFixed(2)}</p>
                                     <div className="flex items-center gap-2 mt-2">
                                         <Button size="icon" variant="ghost" className="h-6 w-6" onClick={() => updateQuantity(item.id, -1)}>
                                             {item.quantity === 1 ? <Trash2 className="h-3 w-3 text-destructive" /> : <Minus className="h-3 w-3" />}
@@ -90,7 +90,7 @@ export default function CustomerMenu({ menuItems, tableId }: { menuItems: MenuIt
                                     </div>
                                 </div>
                             </div>
-                            <p className="font-semibold">${item.totalPrice.toFixed(2)}</p>
+                            <p className="font-semibold">₹{item.totalPrice.toFixed(2)}</p>
                         </div>
                     ))}
                 </div>
@@ -100,7 +100,7 @@ export default function CustomerMenu({ menuItems, tableId }: { menuItems: MenuIt
                 <div className="w-full space-y-4">
                     <div className="flex justify-between font-bold text-lg">
                         <span>Total:</span>
-                        <span>${cartTotal.toFixed(2)}</span>
+                        <span>₹{cartTotal.toFixed(2)}</span>
                     </div>
                     <Button className="w-full" size="lg" onClick={placeOrder} disabled={cart.length === 0}>
                         Place Order
@@ -120,7 +120,7 @@ export default function CustomerMenu({ menuItems, tableId }: { menuItems: MenuIt
               <h3 className="text-lg font-semibold">{item.name}</h3>
               <p className="text-sm text-muted-foreground flex-1 mt-1">{item.description}</p>
               <div className="flex justify-between items-center mt-4">
-                <span className="font-bold text-lg">${item.price.toFixed(2)}</span>
+                <span className="font-bold text-lg">₹{item.price.toFixed(2)}</span>
                 <Button variant="outline" size="sm" onClick={() => addToCart(item)}>
                   <Plus className="h-4 w-4 mr-2" /> Add
                 </Button>

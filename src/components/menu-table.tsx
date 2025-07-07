@@ -108,7 +108,7 @@ export default function MenuTable({ initialItems }: { initialItems: MenuItem[] }
                   <TableCell className="hidden md:table-cell max-w-xs truncate">
                     {item.description}
                   </TableCell>
-                  <TableCell>${item.price.toFixed(2)}</TableCell>
+                  <TableCell>₹{item.price.toFixed(2)}</TableCell>
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>

@@ -81,7 +81,7 @@ export function AddOrderDialog({ isOpen, onOpenChange, menuItems, onAddOrder }: 
                     <Image src={item.imageUrl} alt={item.name} width={300} height={200} className="w-full h-24 object-cover" data-ai-hint="coffee pastry" />
                     <div className="p-3">
                       <h4 className="font-semibold truncate">{item.name}</h4>
-                      <p className="text-sm text-muted-foreground">${item.price.toFixed(2)}</p>
+                      <p className="text-sm text-muted-foreground">₹{item.price.toFixed(2)}</p>
                     </div>
                   </Card>
                 ))}
@@ -99,7 +99,7 @@ export function AddOrderDialog({ isOpen, onOpenChange, menuItems, onAddOrder }: 
                     <div key={item.id} className="flex items-center justify-between">
                         <div>
                             <p className="font-semibold">{item.menuItem.name}</p>
-                            <p className="text-sm text-muted-foreground">${item.unitPrice.toFixed(2)}</p>
+                            <p className="text-sm text-muted-foreground">₹{item.unitPrice.toFixed(2)}</p>
                         </div>
                         <div className="flex items-center gap-2">
                             <Button size="icon" variant="outline" className="h-6 w-6" onClick={() => updateQuantity(item.id, -1)}>
@@ -109,7 +109,7 @@ export function AddOrderDialog({ isOpen, onOpenChange, menuItems, onAddOrder }: 
                             <Button size="icon" variant="outline" className="h-6 w-6" onClick={() => updateQuantity(item.id, 1)}>
                                 <Plus className="h-3 w-3" />
                             </Button>
-                            <span className="w-16 text-right font-medium">${item.totalPrice.toFixed(2)}</span>
+                            <span className="w-16 text-right font-medium">₹{item.totalPrice.toFixed(2)}</span>
                         </div>
                     </div>
                   ))}
@@ -119,7 +119,7 @@ export function AddOrderDialog({ isOpen, onOpenChange, menuItems, onAddOrder }: 
             <div className="border-t mt-4 pt-4">
               <div className="flex justify-between items-center text-xl font-bold">
                 <span>Total:</span>
-                <span>${total.toFixed(2)}</span>
+                <span>₹{total.toFixed(2)}</span>
               </div>
             </div>
           </div>
