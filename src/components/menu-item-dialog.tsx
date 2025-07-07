@@ -16,6 +16,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { createAIDescription } from '@/app/actions';
 import { Sparkles, LoaderCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import Image from 'next/image';
 
 type MenuItemDialogProps = {
   isOpen: boolean;
@@ -75,6 +76,17 @@ export function MenuItemDialog({ isOpen, onOpenChange, item, onSave }: MenuItemD
     }
   }, [aiState, toast]);
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageUrl(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSubmit = () => {
     onSave({
       id: item?.id || '',
@@ -104,11 +116,29 @@ export function MenuItemDialog({ isOpen, onOpenChange, item, onSave }: MenuItemD
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="category" className="text-right">Category</Label>
-            <Input id="category" value={category} onChange={e => setCategory(e.target.value)} className="col-span-3" placeholder="e.g., Coffee, Tea" />
+            <Input id="category" value={category} onChange={e => setCategory(e.target.value)} className="col-span-3" placeholder="e.g., Vadapav, Burger" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="imageUrl" className="text-right">Image URL</Label>
-            <Input id="imageUrl" value={imageUrl} onChange={e => setImageUrl(e.target.value)} className="col-span-3" placeholder="https://placehold.co/300x200.png" />
+            <Label className="text-right">Image</Label>
+            <div className="col-span-3 flex items-center gap-4">
+              {imageUrl && (
+                <Image
+                  src={imageUrl}
+                  alt={name || 'Menu item image'}
+                  width={80}
+                  height={80}
+                  className="rounded-md object-cover aspect-square"
+                  data-ai-hint="food image"
+                />
+              )}
+              <Input
+                id="image-upload"
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="col-span-3"
+              />
+            </div>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="description" className="text-right">Description</Label>
@@ -125,11 +155,11 @@ export function MenuItemDialog({ isOpen, onOpenChange, item, onSave }: MenuItemD
                 <form action={(formData) => startTransition(() => formAction(formData))} className="space-y-4">
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="ingredients" className="text-right">Ingredients</Label>
-                        <Input id="ingredients" name="ingredients" placeholder="e.g., espresso, steamed milk, caramel" className="col-span-3" onChange={e => setIngredients(e.target.value)} />
+                        <Input id="ingredients" name="ingredients" placeholder="e.g., potato, bun, spices" className="col-span-3" onChange={e => setIngredients(e.target.value)} />
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="style" className="text-right">Style</Label>
-                        <Input id="style" name="style" placeholder="e.g., Sweet, comforting" className="col-span-3" onChange={e => setStyle(e.target.value)} />
+                        <Input id="style" name="style" placeholder="e.g., Street food, spicy" className="col-span-3" onChange={e => setStyle(e.target.value)} />
                     </div>
                     <div className="flex justify-end">
                         <Button type="submit" variant="outline" disabled={isPending || !ingredients || !style}>
