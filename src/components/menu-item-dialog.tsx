@@ -1,6 +1,5 @@
 'use client';
-import { useState, useEffect, useTransition } from 'react';
-import { useFormState } from 'react-dom';
+import { useState, useEffect, useTransition, useActionState } from 'react';
 import type { MenuItem } from '@/lib/types';
 import {
   Dialog,
@@ -46,7 +45,7 @@ export function MenuItemDialog({ isOpen, onOpenChange, item, onSave }: MenuItemD
   const [ingredients, setIngredients] = useState('');
   const [style, setStyle] = useState('');
 
-  const [aiState, formAction] = useFormState(createAIDescription, initialState);
+  const [aiState, formAction] = useActionState(createAIDescription, initialState);
   const [isPending, startTransition] = useTransition();
   const { toast } = useToast();
 
@@ -68,7 +67,7 @@ export function MenuItemDialog({ isOpen, onOpenChange, item, onSave }: MenuItemD
     setStyle('');
     aiState.description = '';
     aiState.error = null;
-  }, [item, isOpen]);
+  }, [item, isOpen, aiState]);
 
   useEffect(() => {
     if (aiState.description) {
