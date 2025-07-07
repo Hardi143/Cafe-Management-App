@@ -3,7 +3,7 @@ export type MenuItem = {
   name: string;
   description: string;
   price: number;
-  category: 'Coffee' | 'Tea' | 'Pastries' | 'Sandwiches';
+  category: string;
   imageUrl: string;
   customizations?: {
     name: string;

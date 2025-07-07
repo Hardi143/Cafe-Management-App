@@ -13,13 +13,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { createAIDescription } from '@/app/actions';
 import { Sparkles, LoaderCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
@@ -39,7 +32,7 @@ const initialState = {
 export function MenuItemDialog({ isOpen, onOpenChange, item, onSave }: MenuItemDialogProps) {
   const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
-  const [category, setCategory] = useState<MenuItem['category']>('Coffee');
+  const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('https://placehold.co/300x200.png');
   const [ingredients, setIngredients] = useState('');
@@ -59,7 +52,7 @@ export function MenuItemDialog({ isOpen, onOpenChange, item, onSave }: MenuItemD
     } else {
       setName('');
       setPrice(0);
-      setCategory('Coffee');
+      setCategory('');
       setDescription('');
       setImageUrl('https://placehold.co/300x200.png');
     }
@@ -111,17 +104,7 @@ export function MenuItemDialog({ isOpen, onOpenChange, item, onSave }: MenuItemD
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="category" className="text-right">Category</Label>
-            <Select value={category} onValueChange={(value: MenuItem['category']) => setCategory(value)}>
-                <SelectTrigger className="col-span-3">
-                    <SelectValue placeholder="Select a category" />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectItem value="Coffee">Coffee</SelectItem>
-                    <SelectItem value="Tea">Tea</SelectItem>
-                    <SelectItem value="Pastries">Pastries</SelectItem>
-                    <SelectItem value="Sandwiches">Sandwiches</SelectItem>
-                </SelectContent>
-            </Select>
+            <Input id="category" value={category} onChange={e => setCategory(e.target.value)} className="col-span-3" placeholder="e.g., Coffee, Tea" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="description" className="text-right">Description</Label>
