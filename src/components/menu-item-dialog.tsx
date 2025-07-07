@@ -107,6 +107,10 @@ export function MenuItemDialog({ isOpen, onOpenChange, item, onSave }: MenuItemD
             <Input id="category" value={category} onChange={e => setCategory(e.target.value)} className="col-span-3" placeholder="e.g., Coffee, Tea" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="imageUrl" className="text-right">Image URL</Label>
+            <Input id="imageUrl" value={imageUrl} onChange={e => setImageUrl(e.target.value)} className="col-span-3" placeholder="https://placehold.co/300x200.png" />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="description" className="text-right">Description</Label>
             <Textarea id="description" value={description} onChange={e => setDescription(e.target.value)} className="col-span-3" />
           </div>
