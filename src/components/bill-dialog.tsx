@@ -55,16 +55,16 @@ export function BillDialog({ isOpen, onOpenChange, order }: BillDialogProps) {
                 <div key={index} className="flex justify-between items-center text-sm">
                   <div>
                     <p>{item.name}</p>
-                    <p className="text-xs text-muted-foreground">{item.quantity} x ₹{item.unitPrice.toFixed(2)}</p>
+                    <p className="text-xs text-muted-foreground">{item.quantity} x RS {item.unitPrice.toFixed(2)}</p>
                   </div>
-                  <span>₹{(item.quantity * item.unitPrice).toFixed(2)}</span>
+                  <span>RS {(item.quantity * item.unitPrice).toFixed(2)}</span>
                 </div>
               ))}
             </div>
             <div className="border-t my-4 border-dashed" />
             <div className="flex justify-between font-bold text-lg">
               <span>Total</span>
-              <span>₹{order.total.toFixed(2)}</span>
+              <span>RS {order.total.toFixed(2)}</span>
             </div>
           </div>
         </div>
